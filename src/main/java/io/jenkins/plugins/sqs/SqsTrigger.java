@@ -37,15 +37,15 @@ public class SqsTrigger extends Trigger<Job<?, ?>> {
     @DataBoundSetter
     @Getter
     @Setter
-    private String sqsTriggerQueueUrl;
+    public String sqsTriggerQueueUrl;
     @DataBoundSetter
     @Getter
     @Setter
-    private String sqsTriggerCredentialsId;
+    public String sqsTriggerCredentialsId;
     @DataBoundSetter
     @Getter
     @Setter
-    private boolean sqsDisableConcurrentBuilds;
+    public boolean sqsDisableConcurrentBuilds;
 
     @Override
     public void start(Job project, boolean newInstance) {
@@ -79,7 +79,7 @@ public class SqsTrigger extends Trigger<Job<?, ?>> {
         }
     }
 
-    private void buildOne(Message message) {
+    public void buildOne(Message message) {
         log.fine(() -> "Build triggered by " + message.getMessageId() + ".");
         List<ParameterValue> parameters = message
                 .getMessageAttributes()
@@ -117,7 +117,7 @@ public class SqsTrigger extends Trigger<Job<?, ?>> {
         }
 
         @Setter(PACKAGE)
-        private transient SqsPoller sqsPoller = new SqsPollerImpl();
+        public transient SqsPoller sqsPoller = new SqsPollerImpl();
 
         public ListBoxModel doFillSqsTriggerCredentialsIdItems(@AncestorInPath Item item) {
             StandardListBoxModel result = new StandardListBoxModel();
@@ -190,7 +190,7 @@ public class SqsTrigger extends Trigger<Job<?, ?>> {
 
     class SqsCause extends Cause {
 
-        private String messageId;
+        public String messageId;
 
         public SqsCause(String messageId) {
             this.messageId = messageId;
